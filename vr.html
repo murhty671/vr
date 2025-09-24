@@ -1,0 +1,1229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eternal Love Gallery 💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-pink: #ff6b9d;
+      --secondary-pink: #ffc3d8;
+      --accent-gold: #ffb347;
+      --warm-white: #fef7f0;
+      --soft-gray: #f5f5f5;
+      --deep-rose: #d63384;
+      --sunset-orange: #ff8a65;
+      --love-purple: #ba68c8;
+      --romantic-gradient: linear-gradient(135deg, #ff6b9d 0%, #ffc3d8 50%, #ffb347 100%);
+      --sunset-gradient: linear-gradient(135deg, #ff8a65 0%, #ff6b9d 50%, #ba68c8 100%);
+      --glass-effect: rgba(255, 255, 255, 0.1);
+      --shadow-soft: 0 8px 32px rgba(255, 107, 157, 0.3);
+      --shadow-hover: 0 20px 60px rgba(255, 107, 157, 0.4);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--romantic-gradient);
+      background-attachment: fixed;
+      overflow-x: hidden;
+      color: white;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* Animated background particles */
+    .bg-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -2;
+      overflow: hidden;
+    }
+
+    .floating-heart {
+      position: absolute;
+      font-size: clamp(0.8rem, 2vw, 2.5rem);
+      animation: floatHeart 12s infinite ease-in-out;
+      opacity: 0.15;
+      color: white;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    @keyframes floatHeart {
+      0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.5);
+        opacity: 0;
+      }
+      5% {
+        opacity: 0.15;
+      }
+      25% {
+        transform: translateY(75vh) rotate(45deg) scale(0.8);
+        opacity: 0.2;
+      }
+      50% {
+        transform: translateY(50vh) rotate(180deg) scale(1.2);
+        opacity: 0.3;
+      }
+      75% {
+        transform: translateY(25vh) rotate(270deg) scale(0.9);
+        opacity: 0.2;
+      }
+      95% {
+        opacity: 0.1;
+      }
+      100% {
+        transform: translateY(-10vh) rotate(360deg) scale(0.3);
+        opacity: 0;
+      }
+    }
+
+    /* Header Section */
+    .header {
+      text-align: center;
+      padding: 3rem 2rem;
+      position: relative;
+      overflow: hidden;
+      z-index: 10;
+    }
+
+    .main-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 700;
+      background: linear-gradient(45deg, white, var(--accent-gold), white);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+      animation: titleGlow 3s ease-in-out infinite alternate;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      opacity: 0.9;
+      animation: fadeInUp 1s ease-out 0.5s both;
+      margin-bottom: 2rem;
+    }
+
+    @keyframes titleGlow {
+      0% { text-shadow: 0 0 20px rgba(255, 255, 255, 0.5); }
+      100% { text-shadow: 0 0 40px rgba(255, 179, 71, 0.8), 0 0 60px rgba(255, 107, 157, 0.6); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 0.9;
+        transform: translateY(0);
+      }
+    }
+
+    /* Gallery Controls */
+    .gallery-controls {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .control-btn {
+      padding: 0.8rem 1.5rem;
+      background: var(--glass-effect);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50px;
+      color: white;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .control-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .control-btn.active {
+      background: var(--deep-rose);
+      box-shadow: var(--shadow-hover);
+    }
+
+    /* Main Gallery Container */
+    .gallery-section {
+      padding: 0 2rem 4rem;
+      position: relative;
+      z-index: 10;
+      background: transparent;
+    }
+
+    /* Horizontal Scrolling Gallery */
+    .horizontal-gallery {
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 2rem 0;
+      margin-bottom: 4rem;
+      z-index: 10;
+    }
+
+    .scroll-container {
+      display: inline-flex;
+      animation: infiniteScroll 40s linear infinite;
+      gap: 2rem;
+    }
+
+    .scroll-container:hover {
+      animation-play-state: paused;
+    }
+
+    .scroll-item {
+      flex-shrink: 0;
+      width: 350px;
+      height: 250px;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .scroll-item:hover {
+      transform: translateY(-15px) scale(1.05);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .scroll-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .scroll-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .scroll-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent, rgba(255, 107, 157, 0.3));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+    }
+
+    .scroll-item:hover::before {
+      opacity: 1;
+    }
+
+    @keyframes infiniteScroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Grid Gallery */
+    .grid-gallery {
+      display: none;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      padding: 2rem 0;
+    }
+
+    .grid-gallery.active {
+      display: grid;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .grid-item {
+      aspect-ratio: 4/3;
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+    }
+
+    .grid-item:hover {
+      transform: translateY(-10px) rotate(2deg);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .grid-item:nth-child(even):hover {
+      transform: translateY(-10px) rotate(-2deg);
+    }
+
+    .grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: all 0.5s ease;
+    }
+
+    .grid-item:hover img {
+      transform: scale(1.2);
+      filter: brightness(1.1) contrast(1.05);
+    }
+
+    /* Masonry Gallery */
+    .masonry-gallery {
+      display: none;
+      columns: 3;
+      column-gap: 2rem;
+      padding: 2rem 0;
+    }
+
+    .masonry-gallery.active {
+      display: block;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 2rem;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.5s ease;
+      cursor: pointer;
+    }
+
+    .masonry-item:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .masonry-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: all 0.3s ease;
+    }
+
+    .masonry-item:hover img {
+      filter: brightness(1.1) saturate(1.2);
+    }
+
+    /* Video Gallery */
+    .video-gallery {
+      display: none;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 2rem;
+      padding: 2rem 0;
+    }
+
+    .video-gallery.active {
+      display: grid;
+      animation: fadeIn 0.8s ease-out;
+    }
+
+    .video-item {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: var(--shadow-soft);
+      transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      cursor: pointer;
+      background: var(--glass-effect);
+      backdrop-filter: blur(10px);
+    }
+
+    .video-item:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .video-item video {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: all 0.5s ease;
+      border-radius: 20px;
+    }
+
+    .video-item:hover video {
+      filter: brightness(1.1) contrast(1.05);
+    }
+
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent, rgba(255, 107, 157, 0.2));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 1;
+      pointer-events: none;
+      border-radius: 20px;
+    }
+
+    .video-item:hover .video-overlay {
+      opacity: 1;
+    }
+
+    .video-title {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+      color: white;
+      padding: 1rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 2;
+      border-radius: 0 0 20px 20px;
+    }
+
+    .video-item:hover .video-title {
+      opacity: 1;
+    }
+
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.9);
+      border: none;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      font-size: 1.5rem;
+      color: var(--primary-pink);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      z-index: 2;
+      box-shadow: var(--shadow-soft);
+      backdrop-filter: blur(10px);
+    }
+
+    .play-button:hover {
+      transform: translate(-50%, -50%) scale(1.1);
+      background: white;
+      box-shadow: var(--shadow-hover);
+    }
+
+    .play-button::before {
+      content: '▶';
+      margin-left: 3px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Love Modal */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+    }
+
+    .modal.active {
+      display: flex;
+      animation: modalFadeIn 0.3s ease-out;
+    }
+
+    .modal-content {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 80px rgba(255, 107, 157, 0.5);
+      position: relative;
+      animation: modalZoomIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .modal img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--glass-effect);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+    }
+
+    .modal-close:hover {
+      background: var(--deep-rose);
+      transform: scale(1.1);
+    }
+
+    @keyframes modalFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes modalZoomIn {
+      from { transform: scale(0.5) rotate(10deg); opacity: 0; }
+      to { transform: scale(1) rotate(0deg); opacity: 1; }
+    }
+
+    /* Heart Rain Effect */
+    .heart-rain {
+      position: fixed;
+      top: -50px;
+      pointer-events: none;
+      z-index: -1;
+      animation: heartFall 4s linear forwards;
+      font-size: 1rem;
+      color: var(--accent-gold);
+      opacity: 0.3;
+      user-select: none;
+    }
+
+    @keyframes heartFall {
+      0% {
+        transform: translateY(-50px) rotate(0deg) scale(0.5);
+        opacity: 0.4;
+      }
+      25% {
+        transform: translateY(25vh) rotate(90deg) scale(1.2);
+        opacity: 0.6;
+      }
+      50% {
+        transform: translateY(50vh) rotate(180deg) scale(0.8);
+        opacity: 0.5;
+      }
+      75% {
+        transform: translateY(75vh) rotate(270deg) scale(1.1);
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg) scale(0.4);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .masonry-gallery {
+        columns: 2;
+        column-gap: 1rem;
+      }
+
+      .video-gallery {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .video-item {
+        min-width: auto;
+      }
+
+      .scroll-item {
+        width: 280px;
+        height: 200px;
+      }
+
+      .gallery-controls {
+        padding: 0 1rem;
+      }
+
+      .control-btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .masonry-gallery {
+        columns: 1;
+      }
+
+      .video-gallery {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .scroll-item {
+        width: 250px;
+        height: 180px;
+      }
+
+      .header {
+        padding: 2rem 1rem;
+      }
+
+      .control-btn {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    /* Additional romantic touches */
+    .sparkle {
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: sparkleAnim 1.5s ease-out forwards;
+    }
+
+    @keyframes sparkleAnim {
+      0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1) rotate(180deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Background Hearts -->
+  <div class="bg-hearts" id="bgHearts"></div>
+
+  <!-- Header Section -->
+  <header class="header">
+    <h1 class="main-title">💕 Our Love Story 💕</h1>
+    <p class="subtitle">Every moment captured, every memory cherished ✨</p>
+    
+    <!-- Gallery Mode Controls -->
+    <div class="gallery-controls">
+      <button class="control-btn active" data-mode="scroll">🎠 Auto Scroll</button>
+      <button class="control-btn" data-mode="grid">📱 Grid View</button>
+      <button class="control-btn" data-mode="masonry">🎨 Masonry</button>
+      <button class="control-btn" data-mode="videos">🎬 Love Videos</button>
+    </div>
+  </header>
+
+  <!-- Main Gallery Section -->
+  <main class="gallery-section">
+    <!-- Horizontal Scrolling Gallery -->
+    <div class="horizontal-gallery active" id="scrollGallery">
+      <div class="scroll-container" id="scrollContainer">
+        <!-- All images in scroll view -->
+        <div class="scroll-item"><img src="IMG-20250917-WA0006.jpg" alt="Our Beautiful Memory 1" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250917-WA0008.jpg" alt="Our Beautiful Memory 2" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250917-WA0016.jpg" alt="Our Beautiful Memory 3" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250917-WA0020.jpg" alt="Our Beautiful Memory 4" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250917-WA0021.jpg" alt="Our Beautiful Memory 5" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0005.jpg" alt="Our Beautiful Memory 6" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0006.jpg" alt="Our Beautiful Memory 7" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0007.jpg" alt="Our Beautiful Memory 8" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0008.jpg" alt="Our Beautiful Memory 9" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0009.jpg" alt="Our Beautiful Memory 10" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0010.jpg" alt="Our Beautiful Memory 11" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0011.jpg" alt="Our Beautiful Memory 12" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0012.jpg" alt="Our Beautiful Memory 13" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0013.jpg" alt="Our Beautiful Memory 14" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0014.jpg" alt="Our Beautiful Memory 15" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0015.jpg" alt="Our Beautiful Memory 16" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0016.jpg" alt="Our Beautiful Memory 17" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0017.jpg" alt="Our Beautiful Memory 18" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0018.jpg" alt="Our Beautiful Memory 19" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0019.jpg" alt="Our Beautiful Memory 20" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0020.jpg" alt="Our Beautiful Memory 21" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0021.jpg" alt="Our Beautiful Memory 22" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0023.jpg" alt="Our Beautiful Memory 23" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0024.jpg" alt="Our Beautiful Memory 24" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0025.jpg" alt="Our Beautiful Memory 25" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0026.jpg" alt="Our Beautiful Memory 26" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0027.jpg" alt="Our Beautiful Memory 27" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0028.jpg" alt="Our Beautiful Memory 28" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0029.jpg" alt="Our Beautiful Memory 29" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0030.jpg" alt="Our Beautiful Memory 30" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0031.jpg" alt="Our Beautiful Memory 31" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0032.jpg" alt="Our Beautiful Memory 32" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0033.jpg" alt="Our Beautiful Memory 33" loading="lazy"></div>
+        
+        <!-- Duplicate all images for seamless loop -->
+        <div class="scroll-item"><img src="IMG-20250917-WA0006.jpg" alt="Our Beautiful Memory 1" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250917-WA0008.jpg" alt="Our Beautiful Memory 2" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250917-WA0016.jpg" alt="Our Beautiful Memory 3" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250917-WA0020.jpg" alt="Our Beautiful Memory 4" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250917-WA0021.jpg" alt="Our Beautiful Memory 5" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0005.jpg" alt="Our Beautiful Memory 6" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0006.jpg" alt="Our Beautiful Memory 7" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0007.jpg" alt="Our Beautiful Memory 8" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0008.jpg" alt="Our Beautiful Memory 9" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0009.jpg" alt="Our Beautiful Memory 10" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0010.jpg" alt="Our Beautiful Memory 11" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0011.jpg" alt="Our Beautiful Memory 12" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0012.jpg" alt="Our Beautiful Memory 13" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0013.jpg" alt="Our Beautiful Memory 14" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0014.jpg" alt="Our Beautiful Memory 15" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0015.jpg" alt="Our Beautiful Memory 16" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0016.jpg" alt="Our Beautiful Memory 17" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0017.jpg" alt="Our Beautiful Memory 18" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0018.jpg" alt="Our Beautiful Memory 19" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0019.jpg" alt="Our Beautiful Memory 20" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0020.jpg" alt="Our Beautiful Memory 21" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250918-WA0021.jpg" alt="Our Beautiful Memory 22" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0023.jpg" alt="Our Beautiful Memory 23" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0024.jpg" alt="Our Beautiful Memory 24" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0025.jpg" alt="Our Beautiful Memory 25" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0026.jpg" alt="Our Beautiful Memory 26" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0027.jpg" alt="Our Beautiful Memory 27" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0028.jpg" alt="Our Beautiful Memory 28" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0029.jpg" alt="Our Beautiful Memory 29" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0030.jpg" alt="Our Beautiful Memory 30" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0031.jpg" alt="Our Beautiful Memory 31" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0032.jpg" alt="Our Beautiful Memory 32" loading="lazy"></div>
+        <div class="scroll-item"><img src="IMG-20250924-WA0033.jpg" alt="Our Beautiful Memory 33" loading="lazy"></div>
+      </div>
+    </div>
+
+    <!-- Grid Gallery -->
+    <div class="grid-gallery" id="gridGallery">
+      <div class="grid-item"><img src="IMG-20250917-WA0006.jpg" alt="Special Moment 1" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250917-WA0008.jpg" alt="Special Moment 2" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250917-WA0016.jpg" alt="Special Moment 3" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250917-WA0020.jpg" alt="Special Moment 4" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250917-WA0021.jpg" alt="Special Moment 5" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250918-WA0005.jpg" alt="Special Moment 6" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250918-WA0006.jpg" alt="Special Moment 7" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250918-WA0007.jpg" alt="Special Moment 8" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250918-WA0008.jpg" alt="Special Moment 9" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250918-WA0009.jpg" alt="Special Moment 10" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250918-WA0010.jpg" alt="Special Moment 11" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250918-WA0011.jpg" alt="Special Moment 12" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250918-WA0012.jpg" alt="Special Moment 13" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250918-WA0013.jpg" alt="Special Moment 14" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250918-WA0014.jpg" alt="Special Moment 15" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250918-WA0015.jpg" alt="Special Moment 16" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250918-WA0016.jpg" alt="Special Moment 17" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250918-WA0017.jpg" alt="Special Moment 18" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250918-WA0018.jpg" alt="Special Moment 19" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250918-WA0019.jpg" alt="Special Moment 20" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250918-WA0020.jpg" alt="Special Moment 21" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250918-WA0021.jpg" alt="Special Moment 22" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250924-WA0023.jpg" alt="Special Moment 23" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250924-WA0024.jpg" alt="Special Moment 24" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250924-WA0025.jpg" alt="Special Moment 25" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250924-WA0026.jpg" alt="Special Moment 26" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250924-WA0027.jpg" alt="Special Moment 27" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250924-WA0028.jpg" alt="Special Moment 28" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250924-WA0029.jpg" alt="Special Moment 29" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250924-WA0030.jpg" alt="Special Moment 30" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250924-WA0031.jpg" alt="Special Moment 31" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250924-WA0032.jpg" alt="Special Moment 32" loading="lazy"></div>
+      <div class="grid-item"><img src="IMG-20250924-WA0033.jpg" alt="Special Moment 33" loading="lazy"></div>
+    </div>
+
+    <!-- Masonry Gallery -->
+    <div class="masonry-gallery" id="masonryGallery">
+      <div class="masonry-item"><img src="IMG-20250917-WA0006.jpg" alt="Precious Memory 1" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250917-WA0008.jpg" alt="Precious Memory 2" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250917-WA0016.jpg" alt="Precious Memory 3" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250917-WA0020.jpg" alt="Precious Memory 4" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250917-WA0021.jpg" alt="Precious Memory 5" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250918-WA0005.jpg" alt="Precious Memory 6" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250918-WA0006.jpg" alt="Precious Memory 7" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250918-WA0007.jpg" alt="Precious Memory 8" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250918-WA0008.jpg" alt="Precious Memory 9" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250918-WA0009.jpg" alt="Precious Memory 10" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250918-WA0010.jpg" alt="Precious Memory 11" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250918-WA0011.jpg" alt="Precious Memory 12" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250918-WA0012.jpg" alt="Precious Memory 13" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250918-WA0013.jpg" alt="Precious Memory 14" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250918-WA0014.jpg" alt="Precious Memory 15" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250918-WA0015.jpg" alt="Precious Memory 16" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250918-WA0016.jpg" alt="Precious Memory 17" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250918-WA0017.jpg" alt="Precious Memory 18" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250918-WA0018.jpg" alt="Precious Memory 19" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250918-WA0019.jpg" alt="Precious Memory 20" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250918-WA0020.jpg" alt="Precious Memory 21" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250918-WA0021.jpg" alt="Precious Memory 22" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250924-WA0023.jpg" alt="Precious Memory 23" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250924-WA0024.jpg" alt="Precious Memory 24" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250924-WA0025.jpg" alt="Precious Memory 25" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250924-WA0026.jpg" alt="Precious Memory 26" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250924-WA0027.jpg" alt="Precious Memory 27" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250924-WA0028.jpg" alt="Precious Memory 28" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250924-WA0029.jpg" alt="Precious Memory 29" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250924-WA0030.jpg" alt="Precious Memory 30" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250924-WA0031.jpg" alt="Precious Memory 31" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250924-WA0032.jpg" alt="Precious Memory 32" loading="lazy"></div>
+      <div class="masonry-item"><img src="IMG-20250924-WA0033.jpg" alt="Precious Memory 33" loading="lazy"></div>
+    </div>
+
+    <!-- Video Gallery -->
+    <div class="video-gallery" id="videoGallery">
+      <div class="video-item">
+        <video preload="metadata" poster="">
+          <source src="WhatsApp Video 2025-09-24 at 19.51.41_bd6e2511.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+        <button class="play-button" onclick="toggleVideo(this)"></button>
+        <div class="video-title">💕 Our Beautiful Moment 1 💕</div>
+      </div>
+      
+      <div class="video-item">
+        <video preload="metadata" poster="">
+          <source src="WhatsApp Video 2025-09-24 at 20.00.44_3a705682.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+        <button class="play-button" onclick="toggleVideo(this)"></button>
+        <div class="video-title">💖 Love in Motion 2 💖</div>
+      </div>
+      
+      <div class="video-item">
+        <video preload="metadata" poster="">
+          <source src="WhatsApp Video 2025-09-24 at 20.00.50_5e210f58.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+        <button class="play-button" onclick="toggleVideo(this)"></button>
+        <div class="video-title">💗 Sweet Memories 3 💗</div>
+      </div>
+      
+      <div class="video-item">
+        <video preload="metadata" poster="">
+          <source src="WhatsApp Video 2025-09-24 at 20.00.54_b70f0c9c.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+        <button class="play-button" onclick="toggleVideo(this)"></button>
+        <div class="video-title">💘 Eternal Love 4 💘</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Modal for Image Preview -->
+  <div class="modal" id="imageModal">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">×</button>
+      <img id="modalImage" src="" alt="Full Size Image">
+    </div>
+  </div>
+
+  <script>
+    // Initialize all gallery functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      initializeGallery();
+      initializeBackgroundHearts();
+      initializeModal();
+      initializeSparkleEffects();
+      initializeHeartRain();
+    });
+
+    // Gallery Mode Switching
+    function initializeGallery() {
+      const controlBtns = document.querySelectorAll('.control-btn');
+      const galleries = {
+        scroll: document.getElementById('scrollGallery'),
+        grid: document.getElementById('gridGallery'),
+        masonry: document.getElementById('masonryGallery'),
+        videos: document.getElementById('videoGallery')
+      };
+
+      controlBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Remove active class from all buttons and galleries
+          controlBtns.forEach(b => b.classList.remove('active'));
+          Object.values(galleries).forEach(g => g.classList.remove('active'));
+
+          // Add active class to clicked button and corresponding gallery
+          btn.classList.add('active');
+          const mode = btn.dataset.mode;
+          galleries[mode].classList.add('active');
+
+          // Pause all videos when switching away from video gallery
+          if (mode !== 'videos') {
+            pauseAllVideos();
+          }
+
+          // Create heart rain effect on switch
+          createHeartRain();
+        });
+      });
+    }
+
+    // Background Hearts Animation
+    function initializeBackgroundHearts() {
+      const bgHeartsContainer = document.getElementById('bgHearts');
+      const heartSymbols = ['💕', '💖', '💗', '💘', '💝', '💞', '💟', '❤️', '🧡', '💛', '💚', '💙', '💜', '🖤', '🤍', '🤎'];
+
+      function createBackgroundHeart() {
+        const heart = document.createElement('div');
+        heart.className = 'floating-heart';
+        heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        
+        // Random sizes between 0.5rem and 3rem
+        const randomSize = (Math.random() * 2.5 + 0.5);
+        heart.style.fontSize = randomSize + 'rem';
+        
+        // Random animation duration between 8-16 seconds
+        heart.style.animationDuration = (Math.random() * 8 + 8) + 's';
+        heart.style.animationDelay = Math.random() * 3 + 's';
+        
+        // Random opacity for more variation
+        const randomOpacity = Math.random() * 0.2 + 0.05;
+        heart.style.opacity = randomOpacity;
+
+        bgHeartsContainer.appendChild(heart);
+
+        // Remove heart after animation completes
+        setTimeout(() => {
+          if (heart.parentNode) {
+            heart.remove();
+          }
+        }, 20000);
+      }
+
+      // Create background hearts continuously but less frequently
+      setInterval(createBackgroundHeart, 3000);
+      
+      // Create initial hearts with staggered timing
+      for (let i = 0; i < 8; i++) {
+        setTimeout(createBackgroundHeart, i * 600);
+      }
+    }
+
+    // Modal Image Preview
+    function initializeModal() {
+      const modal = document.getElementById('imageModal');
+      const modalImage = document.getElementById('modalImage');
+      const modalClose = document.getElementById('modalClose');
+      const allImages = document.querySelectorAll('.scroll-item img, .grid-item img, .masonry-item img');
+
+      // Open modal when clicking on images
+      allImages.forEach(img => {
+        img.addEventListener('click', () => {
+          modal.classList.add('active');
+          modalImage.src = img.src.replace(/\/\d+\/\d+/, '/800/600'); // Higher resolution
+          document.body.style.overflow = 'hidden';
+          
+          // Create sparkle effect on modal open
+          createSparkles(img);
+        });
+      });
+
+      // Close modal
+      function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      modalClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      // Close modal with Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+          closeModal();
+        }
+      });
+    }
+
+    // Sparkle Effects on Hover
+    function initializeSparkleEffects() {
+      const sparkleElements = document.querySelectorAll('.scroll-item, .grid-item, .masonry-item');
+
+      sparkleElements.forEach(element => {
+        element.addEventListener('mouseenter', () => {
+          createSparkles(element);
+        });
+      });
+    }
+
+    function createSparkles(element) {
+      const rect = element.getBoundingClientRect();
+      const sparkleCount = Math.random() * 8 + 5;
+
+      for (let i = 0; i < sparkleCount; i++) {
+        setTimeout(() => {
+          const sparkle = document.createElement('div');
+          sparkle.className = 'sparkle';
+          sparkle.style.left = (rect.left + Math.random() * rect.width) + 'px';
+          sparkle.style.top = (rect.top + Math.random() * rect.height) + 'px';
+          sparkle.style.width = sparkle.style.height = (Math.random() * 6 + 3) + 'px';
+
+          document.body.appendChild(sparkle);
+
+          setTimeout(() => sparkle.remove(), 1500);
+        }, i * 100);
+      }
+    }
+
+    // Heart Rain Effect
+    function initializeHeartRain() {
+      // Create heart rain on page interactions
+      document.addEventListener('click', createHeartRain);
+    }
+
+    function createHeartRain() {
+      const heartSymbols = ['💕', '💖', '💗', '💘', '💝', '💞', '💟'];
+      const rainCount = Math.random() * 12 + 8;
+
+      for (let i = 0; i < rainCount; i++) {
+        setTimeout(() => {
+          const heart = document.createElement('div');
+          heart.className = 'heart-rain';
+          heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+          heart.style.left = Math.random() * 100 + 'vw';
+          
+          // Random sizes between 0.8rem and 2.5rem
+          const randomSize = (Math.random() * 1.7 + 0.8);
+          heart.style.fontSize = randomSize + 'rem';
+          
+          // Random animation duration
+          heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+          
+          // Random delay for more natural effect
+          heart.style.animationDelay = (Math.random() * 0.5) + 's';
+
+          document.body.appendChild(heart);
+
+          setTimeout(() => {
+            if (heart.parentNode) {
+              heart.remove();
+            }
+          }, 6000);
+        }, i * 100);
+      }
+    }
+
+    // Enhanced Scroll Behavior
+    function initializeScrollEffects() {
+      const scrollContainer = document.getElementById('scrollContainer');
+      let isScrollPaused = false;
+
+      // Pause scroll on hover
+      scrollContainer.addEventListener('mouseenter', () => {
+        scrollContainer.style.animationPlayState = 'paused';
+      });
+
+      scrollContainer.addEventListener('mouseleave', () => {
+        scrollContainer.style.animationPlayState = 'running';
+      });
+
+      // Touch support for mobile
+      let startX = 0;
+      scrollContainer.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        scrollContainer.style.animationPlayState = 'paused';
+      });
+
+      scrollContainer.addEventListener('touchend', () => {
+        scrollContainer.style.animationPlayState = 'running';
+      });
+    }
+
+    // Performance optimization for animations
+    function optimizeAnimations() {
+      // Reduce animations on low-performance devices
+      const isLowPerformance = navigator.hardwareConcurrency < 4 || navigator.connection?.effectiveType === 'slow-2g';
+      
+      if (isLowPerformance) {
+        document.documentElement.style.setProperty('--animation-speed', '0.5s');
+        // Reduce heart generation frequency
+        setInterval(() => {
+          if (document.querySelectorAll('.floating-heart').length > 10) {
+            document.querySelector('.floating-heart')?.remove();
+          }
+        }, 5000);
+      }
+    }
+
+    // Initialize scroll effects and optimizations
+    setTimeout(() => {
+      initializeScrollEffects();
+      optimizeAnimations();
+    }, 1000);
+
+    // Easter egg: Double-click for surprise
+    let clickCount = 0;
+    document.addEventListener('click', () => {
+      clickCount++;
+      if (clickCount === 10) {
+        createMassiveHeartExplosion();
+        clickCount = 0;
+      }
+      setTimeout(() => {
+        if (clickCount > 0) clickCount--;
+      }, 1000);
+    });
+
+    function createMassiveHeartExplosion() {
+      const explosion = ['💥', '✨', '🎆', '🎇', '💫', '⭐'];
+      const hearts = ['💕', '💖', '💗', '💘', '💝', '💞', '💟', '❤️'];
+      
+      for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+          const element = document.createElement('div');
+          element.style.cssText = `
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            font-size: 2rem;
+            pointer-events: none;
+            z-index: 9999;
+            animation: explode ${Math.random() * 2 + 1}s ease-out forwards;
+          `;
+          
+          const style = document.createElement('style');
+          style.textContent = `
+            @keyframes explode {
+              0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 1; }
+              100% { 
+                transform: translate(${(Math.random() - 0.5) * 800}px, ${(Math.random() - 0.5) * 600}px) scale(1.5) rotate(${Math.random() * 720}deg); 
+                opacity: 0; 
+              }
+            }
+          `;
+          document.head.appendChild(style);
+          
+          element.textContent = i % 10 === 0 ? explosion[Math.floor(Math.random() * explosion.length)] : hearts[Math.floor(Math.random() * hearts.length)];
+          document.body.appendChild(element);
+          
+          setTimeout(() => {
+            element.remove();
+            style.remove();
+          }, 3000);
+        }, i * 50);
+      }
+    }
+
+    // Accessibility improvements
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        document.body.classList.add('keyboard-navigation');
+      }
+    });
+
+    document.addEventListener('mousedown', () => {
+      document.body.classList.remove('keyboard-navigation');
+    });
+
+    // Add focus styles for keyboard navigation
+    const style = document.createElement('style');
+    style.textContent = `
+      .keyboard-navigation .control-btn:focus,
+      .keyboard-navigation .scroll-item:focus,
+      .keyboard-navigation .grid-item:focus,
+      .keyboard-navigation .masonry-item:focus {
+        outline: 3px solid var(--accent-gold);
+        outline-offset: 2px;
+      }
+    `;
+    document.head.appendChild(style);
+
+    console.log('💕 Love Gallery Initialized! Click around to see magic happen! 💕');
+
+    // Video Control Functions
+    function toggleVideo(button) {
+      const video = button.parentNode.querySelector('video');
+      const overlay = button.parentNode.querySelector('.video-overlay');
+      
+      if (video.paused) {
+        // Pause all other videos first
+        pauseAllVideos();
+        
+        // Play this video
+        video.play();
+        button.style.opacity = '0';
+        overlay.style.opacity = '0';
+        
+        // Create heart rain effect when video starts
+        createHeartRain();
+      } else {
+        video.pause();
+        button.style.opacity = '1';
+        overlay.style.opacity = '0';
+      }
+    }
+
+    function pauseAllVideos() {
+      const videos = document.querySelectorAll('.video-item video');
+      const playButtons = document.querySelectorAll('.play-button');
+      const overlays = document.querySelectorAll('.video-overlay');
+      
+      videos.forEach((video, index) => {
+        if (!video.paused) {
+          video.pause();
+          playButtons[index].style.opacity = '1';
+          overlays[index].style.opacity = '0';
+        }
+      });
+    }
+
+    // Add event listeners for video ended events
+    document.addEventListener('DOMContentLoaded', function() {
+      const videos = document.querySelectorAll('.video-item video');
+      const playButtons = document.querySelectorAll('.play-button');
+      const overlays = document.querySelectorAll('.video-overlay');
+      
+      videos.forEach((video, index) => {
+        video.addEventListener('ended', () => {
+          playButtons[index].style.opacity = '1';
+          overlays[index].style.opacity = '0';
+          // Create heart explosion when video ends
+          createMassiveHeartExplosion();
+        });
+        
+        // Update play button when video is paused
+        video.addEventListener('pause', () => {
+          playButtons[index].style.opacity = '1';
+          overlays[index].style.opacity = '0';
+        });
+        
+        video.addEventListener('play', () => {
+          playButtons[index].style.opacity = '0';
+          overlays[index].style.opacity = '1';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
